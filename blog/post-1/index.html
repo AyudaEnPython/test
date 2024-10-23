@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="es" class="scroll-smooth"> <head><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.19.0/tabler-icons.min.css" integrity="sha512-e6jatqFzab2HqrdiIC3UPTmQcEm9V2VThLsaHKQDS8t86l1zMhyjJaKTs4GUrXHY/DV3PyUm5WdpwwhVJOm0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Blog
+<!DOCTYPE html><html lang="es" class="scroll-smooth"> <head><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.19.0/tabler-icons.min.css" integrity="sha512-e6jatqFzab2HqrdiIC3UPTmQcEm9V2VThLsaHKQDS8t86l1zMhyjJaKTs4GUrXHY/DV3PyUm5WdpwwhVJOm0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/blog-cells@0.7.1/dist/blog-cells.css" integrity="sha384-WTyObMIz+pJFKKBrAWAzdQR97p6wSVxgp4MrCmb2kxgAqz5M8sPvKBINcDpp1ERV" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/blog-cells@0.7.1/dist/blog-cells.js" integrity="sha384-8IdgH/vqj5QT2hghXrEdBvZwtNAK82dxP4JdkptO3xpqDeOFij/7sR2rqwQlHXPt" crossorigin="anonymous"></script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Blog
 "><meta name="author" content="AyudaEnPython"><meta property="og:title" content="Blog"><meta property="og:description" content="Blog
-"><meta property="og:type" content="website"><meta property="og:site-name" content="AyudaEnPython"><meta property="og:url" content="https://ayudaenpython.com/blog"><meta property="og:locale" content="es_ES"><link rel="icon" type="image/svg+xml" href="/favicon.ico"><title>Python es de tipado dinámico y fuerte | AyudaEnPython</title><link rel="stylesheet" href="/_astro/_slug_.Cd_uz16i.css">
+"><meta property="og:type" content="website"><meta property="og:site-name" content="AyudaEnPython"><meta property="og:url" content="https://ayudaenpython.com/blog"><meta property="og:locale" content="es_ES"><link rel="icon" type="image/svg+xml" href="/favicon.ico"><title>Python es de tipado dinámico y fuerte | AyudaEnPython</title><link rel="stylesheet" href="/_astro/_slug_.DVTp9G9W.css">
 <style>::-webkit-scrollbar{width:8px}#editorOutput::-webkit-scrollbar{width:8px;height:8px}#editorOutput::-webkit-scrollbar-thumb{background:#6b7280;border-radius:10px}#editorOutput::-webkit-scrollbar-corner{background:transparent}@media (width <= 640px){.cm-editor{font-size:.75rem}}@media (640px < width <= 1024px){.cm-editor{font-size:.875rem}}@media (width > 1024px){.cm-editor{font-size:1rem}}ul,ol{list-style:revert}
 a[data-astro-cid-kojrqmyj],a[data-astro-cid-3qw67lga],button[data-astro-cid-3qw67lga],a[data-astro-cid-b2oiug2v],button[data-astro-cid-b2oiug2v],p[data-astro-cid-l3trhy4j]{font-family:Pixelify Sans}
 </style>
@@ -22,6 +22,9 @@ vamos a analizarlo por partes:</p>
 <p>Un lenguaje de programación usa un <strong><em>tipado dinámico</em></strong> cuando la comprobación
 de tipificación (typing) se realiza durante su ejecución y no en su
 compilación. <sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-footnote-ref="" aria-describedby="footnote-label">1</a></sup></p>
+<script type="text/notebook-cell" data-kernel="python">
+print("Hello World!")
+</script>
 <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">>>></span><span style="color:#E1E4E8"> numero </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1</span></span>
 <span class="line"><span style="color:#F97583">>>></span><span style="color:#79B8FF"> print</span><span style="color:#E1E4E8">(numero)</span></span>
 <span class="line"><span style="color:#79B8FF">1</span></span>
@@ -29,6 +32,19 @@ compilación. <sup><a href="#user-content-fn-1" id="user-content-fnref-1" data-f
 <span class="line"><span style="color:#F97583">>>></span><span style="color:#79B8FF"> print</span><span style="color:#E1E4E8">(numero)</span></span>
 <span class="line"><span style="color:#E1E4E8">uno</span></span>
 <span class="line"></span></code></pre>
+<script type="text/notebook-cell" data-kernel="python">
+class Person:
+   
+    def __init__(self, name):
+        self.name = name
+      
+    def __str__(self):
+        return f"{self.name}"
+
+
+person = Person("John")
+print(person)
+</script>
 <p>Debido a ser de tipado dinámico, <code>numero</code> puede tener diferentes tipos en
 diferentes tiempos de ejecución: primero es un entero (<code>int</code>) y luego una cadena de
 texto (<code>str</code>). Esto permite mayor flexibilidad a costa de rendimiento por cierto.</p>
