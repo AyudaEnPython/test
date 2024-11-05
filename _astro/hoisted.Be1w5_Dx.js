@@ -1,0 +1,26 @@
+import"./Meta.astro_astro_type_script_index_0_lang.-b7UGIKM.js";class n{constructor(t,e,o){this.pyodide=e,this.setupStyles(),this.container=t,this.container.classList.add("rb-container"),this.createEditor(o),this.createButtons(),this.createOutput()}setupStyles(){const t=document.createElement("style");t.textContent=`
+      .rb-btn { 
+        background-color: rgba(23, 23, 23, 0.2); color: #737373;
+        border: 1px solid #737373; text-align: center; font-size: 0.875rem;
+        border-radius: 4px; margin-left: 4px; padding: 0 4px 0 4px;
+      }
+      .rb-btn:hover { color: #d4d4d4; border-color: #d4d4d4; }
+      .rb-editor { border-radius: 4px; padding: 2px; }
+      .rb-container {
+        position: relative; background-color: #282828; border-radius: 4px;
+        padding: 0px; margin: 24px 0px;
+      }
+      .rb-btn-group {
+        position: absolute; z-index: 100; top: 2px; right: 4px; margin: 0px;
+      }
+      .rb-output { margin: 0; padding: 0; color: #fafafa; }
+      .rb-output:not(:empty) {
+        font-family: monospace; font-size: 0.875rem;
+        margin: 5px 32px; padding: 0 0 4px 0;
+      }
+    `,document.head.appendChild(t)}createEditor(t){const e=document.createElement("div");e.classList.add("rb-editor"),this.editor=ace.edit(e),this.editor.session.setMode("ace/mode/python"),this.editor.setTheme("ace/theme/gruvbox"),this.editor.setValue(t),this.editor.setOptions({fontSize:"0.875rem",highlightActiveLine:!1,highlightGutterLine:!1,showFoldWidgets:!1,showGutter:!0,showPrintMargin:!1,minLines:2,maxLines:30}),this.container.appendChild(e)}createButton(t,e){const o=document.createElement("button");return o.textContent=t,o.classList.add("rb-btn"),o.addEventListener("click",e),o}createButtons(){const t=document.createElement("div");t.classList.add("rb-btn-group"),t.appendChild(this.createButton("▷",()=>this.runCode())),t.appendChild(this.createButton("⟲",()=>this.clearOutput())),t.appendChild(this.createButton("⧈",()=>this.copyCode())),this.container.appendChild(t)}createOutput(){this.output=document.createElement("div"),this.output.classList.add("rb-output"),this.container.appendChild(this.output)}async runCode(){const t=this.editor.getValue();try{await this.pyodide.runPythonAsync(`
+        import sys
+        import io
+        sys.stdout = io.StringIO()
+      `),await this.pyodide.runPythonAsync(t);const e=await this.pyodide.runPythonAsync("sys.stdout.getvalue()");this.output.textContent=e}catch(e){this.output.textContent=this.handleError(e)}}clearOutput(){this.output.textContent=""}copyCode(){const t=this.editor.getValue();navigator.clipboard.writeText(t).then(()=>{console.log("Code copied to clipboard")}).catch(e=>{console.error("Could not copy text: ",e)})}handleError(t){const e=t.message||t.toString(),o=e.split(`
+`);return o[o.length-2]||e}static async initialize(){const t=await loadPyodide({stdin:()=>prompt()});document.querySelectorAll("pre.runnable").forEach(o=>{const i=o.textContent.trim(),r=document.createElement("div");o.replaceWith(r),new n(r,t,i).editor.clearSelection(!0)})}}n.initialize();
